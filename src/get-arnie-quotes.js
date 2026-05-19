@@ -10,14 +10,14 @@ const getArnieQuotes = async (urls) => {
       const res = await httpGet(url);
 
       return {
-        status: res.status,
+        key: res.status === 200 ? "Arnie Quote" : "FAILURE",
         message: JSON.parse(res.body).message,
       };
     }),
   );
 
-  return response.map(({ status, message }) => ({
-    [status === 200 ? "Arnie Quote" : "FAILURE"]: message,
+  return response.map(({ key, message }) => ({
+    [key]: message,
   }));
 };
 
